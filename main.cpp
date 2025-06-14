@@ -5,7 +5,7 @@
 #include <string>
 #include <algorithm>
 #include "Video.h"
-#include "./Pelicula.h"
+#include "Pelicula.h"
 #include "Serie.h"
 
 using namespace std;
