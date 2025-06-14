@@ -6,8 +6,10 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Incluye la carpeta actual (donde están tus .h)
 include_directories(${CMAKE_SOURCE_DIR})
 
+#  Agrega todos los archivos fuente (.cpp)
 set(SOURCES
     main.cpp
     Video.cpp
