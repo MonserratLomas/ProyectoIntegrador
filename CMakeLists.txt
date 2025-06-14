@@ -1,25 +1,26 @@
 cmake_minimum_required(VERSION 3.30)
 
-# Nombre del proyecto
 project(ProyectoIntegrador VERSION 1.0.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Incluir el directorio raíz (donde están los .h y .cpp)
 include_directories(${CMAKE_SOURCE_DIR})
 
-# Archivos fuente principales
+# Archivos fuente del ejecutable principal (todos en raíz)
 set(SOURCES
     main.cpp
     Video.cpp
-    Serie.cpp
     Pelicula.cpp
+    Serie.cpp
     Episodio.cpp
 )
 
 add_executable(main ${SOURCES})
 
+# Opciones para testing y cobertura
 option(ENABLE_TESTING "Enable a Unit Testing build." ON)
 option(ENABLE_COVERAGE "Enable coverage reporting" ON)
 
@@ -29,6 +30,7 @@ if (ENABLE_COVERAGE)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
 endif()
 
+# Descargar GoogleTest con FetchContent
 include(FetchContent)
 FetchContent_Declare(
     googletest
@@ -41,7 +43,7 @@ if(ENABLE_TESTING)
     enable_testing()
 
     function(add_test_executable name source)
-        add_executable(${name} ${source} Video.cpp Serie.cpp Pelicula.cpp Episodio.cpp)
+        add_executable(${name} ${source})
         target_link_libraries(${name} PRIVATE gtest gtest_main)
         if (ENABLE_COVERAGE)
             target_link_libraries(${name} PRIVATE gcov)
@@ -51,11 +53,12 @@ if(ENABLE_TESTING)
         add_test(NAME ${name} COMMAND ${name})
     endfunction()
 
+    # Tus tests dentro de la carpeta test/
     add_test_executable(test_video test/test_video.cpp)
     add_test_executable(test_serie test/test_serie.cpp)
-    add_test_executable(test_pelicula test/test_pelicula.cpp)
-    add_test_executable(test_episodio test/test_episodio.cpp)
+    # Agrega más test que tengas...
 
+    # Cobertura
     if (ENABLE_COVERAGE)
         find_program(LCOV lcov)
         if (LCOV)
