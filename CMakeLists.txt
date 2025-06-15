@@ -1,39 +1,20 @@
 cmake_minimum_required(VERSION 3.10)
 project(ProyectoIntegrador)
 
-set(CMAKE_CXX_STANDARD 17)
+# Configuración para el estándar C++ y el compilador
+set(CMAKE_CXX_STANDARD 14)
 
-# Agrega tus fuentes
-set(SOURCES
-    main.cpp         
-    Video.cpp
-    Pelicula.cpp
-    Serie.cpp
-    Episodio.cpp
-)
+# Especificar los archivos fuente principales
+add_executable(ProyectoIntegrador main.cpp Video.cpp Pelicula.cpp Serie.cpp Episodio.cpp)
 
-# Ejecutable principal
-add_executable(ProyectoIntegrador ${SOURCES})
+# Añadir directorios de cabeceras (si tienes alguno)
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
-# Google Test
+# Configuración de los tests usando Google Test
 enable_testing()
+add_subdirectory(test)
+
+# Si tienes alguna biblioteca de terceros, como GTest, añádela
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
-
-# Fuentes para tests (excluyendo main.cpp)
-set(TEST_SOURCES
-    test/test_main.cpp       
-    test/test_episodio.cpp
-    test/test_pelicula.cpp
-    test/test_serie.cpp
-    test/test_video.cpp
-    Video.cpp
-    Pelicula.cpp
-    Serie.cpp
-    Episodio.cpp
-)
-
-add_executable(runTests ${TEST_SOURCES})
-target_link_libraries(runTests ${GTEST_LIBRARIES} pthread)
-
-add_test(NAME runTests COMMAND runTests)
+target_link_libraries(ProyectoIntegrador ${GTEST_LIBRARIES})
