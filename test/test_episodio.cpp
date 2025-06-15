@@ -1,3 +1,12 @@
+/*
+ * test_episodio.cpp
+ * 
+ * Pruebas unitarias para la clase Episodio.
+ * 
+ * Proyecto: Proyecto Integrador - Programación Orientada a Objetos
+ * Autor: Monserrat Hernández Lomas
+ * Fecha: Junio 2025
+ */
 #include <gtest/gtest.h>
 #include "../Episodio.h"
 
