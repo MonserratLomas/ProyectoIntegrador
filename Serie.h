@@ -41,13 +41,13 @@ public:
      * @brief Obtiene el número de temporada del episodio.
      * @return Número de temporada.
      */
-    int getTemporada() const;
+    int GetTemporada() const;
 
     /**
      * @brief Obtiene el título del episodio.
      * @return Título del episodio.
      */
-    std::string getTituloEpisodio() const;
+    std::string GetTituloEpisodio() const;
 };
 
 #endif
