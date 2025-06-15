@@ -65,6 +65,16 @@ CMAKE_BINARY_DIR = /Users/monselomas/ProyectoIntegrador/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running tests..."
+	/opt/homebrew/bin/ctest $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+.PHONY : test/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake cache editor..."
@@ -129,12 +139,26 @@ ProyectoIntegrador/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProyectoIntegrador.dir/build.make CMakeFiles/ProyectoIntegrador.dir/build
 .PHONY : ProyectoIntegrador/fast
 
+#=============================================================================
+# Target rules for targets named runTests
+
+# Build rule for target.
+runTests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 runTests
+.PHONY : runTests
+
+# fast build rule for target.
+runTests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/build
+.PHONY : runTests/fast
+
 Episodio.o: Episodio.cpp.o
 .PHONY : Episodio.o
 
 # target to build an object file
 Episodio.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProyectoIntegrador.dir/build.make CMakeFiles/ProyectoIntegrador.dir/Episodio.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/Episodio.cpp.o
 .PHONY : Episodio.cpp.o
 
 Episodio.i: Episodio.cpp.i
@@ -143,6 +167,7 @@ Episodio.i: Episodio.cpp.i
 # target to preprocess a source file
 Episodio.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProyectoIntegrador.dir/build.make CMakeFiles/ProyectoIntegrador.dir/Episodio.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/Episodio.cpp.i
 .PHONY : Episodio.cpp.i
 
 Episodio.s: Episodio.cpp.s
@@ -151,6 +176,7 @@ Episodio.s: Episodio.cpp.s
 # target to generate assembly for a file
 Episodio.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProyectoIntegrador.dir/build.make CMakeFiles/ProyectoIntegrador.dir/Episodio.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/Episodio.cpp.s
 .PHONY : Episodio.cpp.s
 
 Pelicula.o: Pelicula.cpp.o
@@ -159,6 +185,7 @@ Pelicula.o: Pelicula.cpp.o
 # target to build an object file
 Pelicula.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProyectoIntegrador.dir/build.make CMakeFiles/ProyectoIntegrador.dir/Pelicula.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/Pelicula.cpp.o
 .PHONY : Pelicula.cpp.o
 
 Pelicula.i: Pelicula.cpp.i
@@ -167,6 +194,7 @@ Pelicula.i: Pelicula.cpp.i
 # target to preprocess a source file
 Pelicula.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProyectoIntegrador.dir/build.make CMakeFiles/ProyectoIntegrador.dir/Pelicula.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/Pelicula.cpp.i
 .PHONY : Pelicula.cpp.i
 
 Pelicula.s: Pelicula.cpp.s
@@ -175,6 +203,7 @@ Pelicula.s: Pelicula.cpp.s
 # target to generate assembly for a file
 Pelicula.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProyectoIntegrador.dir/build.make CMakeFiles/ProyectoIntegrador.dir/Pelicula.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/Pelicula.cpp.s
 .PHONY : Pelicula.cpp.s
 
 Serie.o: Serie.cpp.o
@@ -183,6 +212,7 @@ Serie.o: Serie.cpp.o
 # target to build an object file
 Serie.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProyectoIntegrador.dir/build.make CMakeFiles/ProyectoIntegrador.dir/Serie.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/Serie.cpp.o
 .PHONY : Serie.cpp.o
 
 Serie.i: Serie.cpp.i
@@ -191,6 +221,7 @@ Serie.i: Serie.cpp.i
 # target to preprocess a source file
 Serie.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProyectoIntegrador.dir/build.make CMakeFiles/ProyectoIntegrador.dir/Serie.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/Serie.cpp.i
 .PHONY : Serie.cpp.i
 
 Serie.s: Serie.cpp.s
@@ -199,6 +230,7 @@ Serie.s: Serie.cpp.s
 # target to generate assembly for a file
 Serie.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProyectoIntegrador.dir/build.make CMakeFiles/ProyectoIntegrador.dir/Serie.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/Serie.cpp.s
 .PHONY : Serie.cpp.s
 
 Video.o: Video.cpp.o
@@ -207,6 +239,7 @@ Video.o: Video.cpp.o
 # target to build an object file
 Video.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProyectoIntegrador.dir/build.make CMakeFiles/ProyectoIntegrador.dir/Video.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/Video.cpp.o
 .PHONY : Video.cpp.o
 
 Video.i: Video.cpp.i
@@ -215,6 +248,7 @@ Video.i: Video.cpp.i
 # target to preprocess a source file
 Video.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProyectoIntegrador.dir/build.make CMakeFiles/ProyectoIntegrador.dir/Video.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/Video.cpp.i
 .PHONY : Video.cpp.i
 
 Video.s: Video.cpp.s
@@ -223,6 +257,7 @@ Video.s: Video.cpp.s
 # target to generate assembly for a file
 Video.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProyectoIntegrador.dir/build.make CMakeFiles/ProyectoIntegrador.dir/Video.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/Video.cpp.s
 .PHONY : Video.cpp.s
 
 main.o: main.cpp.o
@@ -231,6 +266,7 @@ main.o: main.cpp.o
 # target to build an object file
 main.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProyectoIntegrador.dir/build.make CMakeFiles/ProyectoIntegrador.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -239,6 +275,7 @@ main.i: main.cpp.i
 # target to preprocess a source file
 main.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProyectoIntegrador.dir/build.make CMakeFiles/ProyectoIntegrador.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -247,7 +284,128 @@ main.s: main.cpp.s
 # target to generate assembly for a file
 main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProyectoIntegrador.dir/build.make CMakeFiles/ProyectoIntegrador.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/main.cpp.s
 .PHONY : main.cpp.s
+
+test/test_episodio.o: test/test_episodio.cpp.o
+.PHONY : test/test_episodio.o
+
+# target to build an object file
+test/test_episodio.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/test/test_episodio.cpp.o
+.PHONY : test/test_episodio.cpp.o
+
+test/test_episodio.i: test/test_episodio.cpp.i
+.PHONY : test/test_episodio.i
+
+# target to preprocess a source file
+test/test_episodio.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/test/test_episodio.cpp.i
+.PHONY : test/test_episodio.cpp.i
+
+test/test_episodio.s: test/test_episodio.cpp.s
+.PHONY : test/test_episodio.s
+
+# target to generate assembly for a file
+test/test_episodio.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/test/test_episodio.cpp.s
+.PHONY : test/test_episodio.cpp.s
+
+test/test_main.o: test/test_main.cpp.o
+.PHONY : test/test_main.o
+
+# target to build an object file
+test/test_main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/test/test_main.cpp.o
+.PHONY : test/test_main.cpp.o
+
+test/test_main.i: test/test_main.cpp.i
+.PHONY : test/test_main.i
+
+# target to preprocess a source file
+test/test_main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/test/test_main.cpp.i
+.PHONY : test/test_main.cpp.i
+
+test/test_main.s: test/test_main.cpp.s
+.PHONY : test/test_main.s
+
+# target to generate assembly for a file
+test/test_main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/test/test_main.cpp.s
+.PHONY : test/test_main.cpp.s
+
+test/test_pelicula.o: test/test_pelicula.cpp.o
+.PHONY : test/test_pelicula.o
+
+# target to build an object file
+test/test_pelicula.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/test/test_pelicula.cpp.o
+.PHONY : test/test_pelicula.cpp.o
+
+test/test_pelicula.i: test/test_pelicula.cpp.i
+.PHONY : test/test_pelicula.i
+
+# target to preprocess a source file
+test/test_pelicula.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/test/test_pelicula.cpp.i
+.PHONY : test/test_pelicula.cpp.i
+
+test/test_pelicula.s: test/test_pelicula.cpp.s
+.PHONY : test/test_pelicula.s
+
+# target to generate assembly for a file
+test/test_pelicula.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/test/test_pelicula.cpp.s
+.PHONY : test/test_pelicula.cpp.s
+
+test/test_serie.o: test/test_serie.cpp.o
+.PHONY : test/test_serie.o
+
+# target to build an object file
+test/test_serie.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/test/test_serie.cpp.o
+.PHONY : test/test_serie.cpp.o
+
+test/test_serie.i: test/test_serie.cpp.i
+.PHONY : test/test_serie.i
+
+# target to preprocess a source file
+test/test_serie.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/test/test_serie.cpp.i
+.PHONY : test/test_serie.cpp.i
+
+test/test_serie.s: test/test_serie.cpp.s
+.PHONY : test/test_serie.s
+
+# target to generate assembly for a file
+test/test_serie.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/test/test_serie.cpp.s
+.PHONY : test/test_serie.cpp.s
+
+test/test_video.o: test/test_video.cpp.o
+.PHONY : test/test_video.o
+
+# target to build an object file
+test/test_video.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/test/test_video.cpp.o
+.PHONY : test/test_video.cpp.o
+
+test/test_video.i: test/test_video.cpp.i
+.PHONY : test/test_video.i
+
+# target to preprocess a source file
+test/test_video.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/test/test_video.cpp.i
+.PHONY : test/test_video.cpp.i
+
+test/test_video.s: test/test_video.cpp.s
+.PHONY : test/test_video.s
+
+# target to generate assembly for a file
+test/test_video.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/runTests.dir/build.make CMakeFiles/runTests.dir/test/test_video.cpp.s
+.PHONY : test/test_video.cpp.s
 
 # Help Target
 help:
@@ -257,7 +415,9 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... test"
 	@echo "... ProyectoIntegrador"
+	@echo "... runTests"
 	@echo "... Episodio.o"
 	@echo "... Episodio.i"
 	@echo "... Episodio.s"
@@ -273,6 +433,21 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... test/test_episodio.o"
+	@echo "... test/test_episodio.i"
+	@echo "... test/test_episodio.s"
+	@echo "... test/test_main.o"
+	@echo "... test/test_main.i"
+	@echo "... test/test_main.s"
+	@echo "... test/test_pelicula.o"
+	@echo "... test/test_pelicula.i"
+	@echo "... test/test_pelicula.s"
+	@echo "... test/test_serie.o"
+	@echo "... test/test_serie.i"
+	@echo "... test/test_serie.s"
+	@echo "... test/test_video.o"
+	@echo "... test/test_video.i"
+	@echo "... test/test_video.s"
 .PHONY : help
 
 
