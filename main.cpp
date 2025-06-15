@@ -92,10 +92,10 @@ vector<Video*> cargarVideos(const string& nombreArchivo) {
 
 void mostrarVideos(const vector<Video*>& videos, int calMin, const string& generoFiltro) {
     for (auto v : videos) {
-        if (v->getCalificacion() >= calMin && (generoFiltro.empty() || toLower(v->getGenero()) == toLower(generoFiltro))) {
-            cout << "ID: " << v->getId() << ", Nombre: " << v->getNombre()
-                 << ", Duración: " << v->getDuracion() << ", Género: " << v->getGenero()
-                 << ", Calificación: " << v->getCalificacion() << endl;
+        if (v->GetCalificacion() >= calMin && (generoFiltro.empty() || toLower(v->GetGenero()) == toLower(generoFiltro))) {
+            cout << "ID: " << v->GetId() << ", Nombre: " << v->GetNombre()
+                 << ", Duración: " << v->GetDuracion() << ", Género: " << v->GetGenero()
+                 << ", Calificación: " << v->GetCalificacion() << endl;
         }
     }
 }
@@ -103,11 +103,11 @@ void mostrarVideos(const vector<Video*>& videos, int calMin, const string& gener
 void mostrarEpisodiosSerie(const vector<Video*>& videos, const string& nombreSerie, int calMin) {
     for (auto v : videos) {
         Serie* s = dynamic_cast<Serie*>(v);
-        if (s && toLower(s->getNombre()) == toLower(nombreSerie) && s->getCalificacion() >= calMin) {
-            cout << "ID: " << s->getId() << ", Nombre: " << s->getNombre()
-                 << ", Temporada: " << s->getTemporada()
-                 << ", Título episodio: " << s->getTituloEpisodio()
-                 << ", Calificación: " << s->getCalificacion() << endl;
+        if (s && toLower(s->GetNombre()) == toLower(nombreSerie) && s->GetCalificacion() >= calMin) {
+            cout << "ID: " << s->GetId() << ", Nombre: " << s->GetNombre()
+                 << ", Temporada: " << s->GetTemporada()
+                 << ", Título episodio: " << s->GetTituloEpisodio()
+                 << ", Calificación: " << s->GetCalificacion() << endl;
         }
     }
 }
@@ -115,11 +115,11 @@ void mostrarEpisodiosSerie(const vector<Video*>& videos, const string& nombreSer
 void mostrarPeliculas(const vector<Video*>& videos, int calMin) {
     for (auto v : videos) {
         Pelicula* p = dynamic_cast<Pelicula*>(v);
-        if (p && p->getCalificacion() >= calMin) {
-            cout << "ID: " << p->getId() << ", Nombre: " << p->getNombre()
-                 << ", Duración: " << p->getDuracion()
-                 << ", Género: " << p->getGenero()
-                 << ", Calificación: " << p->getCalificacion() << endl;
+        if (p && p->GetCalificacion() >= calMin) {
+            cout << "ID: " << p->GetId() << ", Nombre: " << p->GetNombre()
+                 << ", Duración: " << p->GetDuracion()
+                 << ", Género: " << p->GetGenero()
+                 << ", Calificación: " << p->GetCalificacion() << endl;
         }
     }
 }
@@ -130,7 +130,7 @@ void calificarVideo(vector<Video*>& videos) {
     getline(cin, titulo);
 
     auto it = find_if(videos.begin(), videos.end(), [&](Video* v) {
-        return toLower(trim(v->getNombre())) == toLower(trim(titulo));
+        return toLower(trim(v->GetNombre())) == toLower(trim(titulo));
     });
 
     if (it != videos.end()) {
@@ -140,7 +140,7 @@ void calificarVideo(vector<Video*>& videos) {
         cin.ignore();  // limpiar buffer
 
         if (cal >= 1 && cal <= 5) {
-            (*it)->agregarCalificacion(cal);
+            (*it)->AgregarCalificacion(cal);
             cout << "Calificación agregada correctamente." << endl;
         } else {
             cout << "Calificación inválida." << endl;
