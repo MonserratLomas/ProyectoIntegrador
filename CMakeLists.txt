@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.30)
 
-project(ProyectoIntegrador VERSION 1.0 LANGUAGES CXX)
+project(ProyectoIntegrador VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -19,7 +19,7 @@ if(ENABLE_COVERAGE)
     endif()
 endif()
 
-# Fuentes principales
+# Archivos fuente del proyecto principal
 set(SOURCES
     main.cpp
     Video.cpp
@@ -29,31 +29,32 @@ set(SOURCES
 )
 
 add_executable(ProyectoIntegrador ${SOURCES})
+
 target_include_directories(ProyectoIntegrador PRIVATE ${CMAKE_SOURCE_DIR})
 
-# Descarga y configuración de GoogleTest
-include(FetchContent)
+# -- Tests --
 
+# Buscar GoogleTest
+include(FetchContent)
 FetchContent_Declare(
   googletest
-  URL https://github.com/google/googletest/archive/refs/tags/release-1.13.0.zip
+  URL https://github.com/google/googletest/archive/refs/tags/release-1.12.1.zip
 )
-
-# Para evitar problemas con tests en subdirectorios
+# Evitar instalar GoogleTest como proyecto externo
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-
 FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-# Buscar archivos de test en carpeta test
+# Archivos fuente de tests (*.cpp dentro de test/)
 file(GLOB TEST_SOURCES "test/test_*.cpp")
 
-# Crear ejecutable para tests
 add_executable(runTests ${TEST_SOURCES})
-target_link_libraries(runTests PRIVATE GTest::gtest_main)
+
+target_link_libraries(runTests PRIVATE GTest::gtest_main ProyectoIntegrador)
+
 target_include_directories(runTests PRIVATE ${CMAKE_SOURCE_DIR})
 
-# Detectar tests para ctest
+# Registrar tests para ctest
 include(GoogleTest)
 gtest_discover_tests(runTests)
