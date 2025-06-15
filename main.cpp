@@ -1,3 +1,12 @@
+/*
+ * main.cpp
+ * 
+ * Función principal que inicia la ejecución del programa del Proyecto Integrador.
+ * 
+ * Proyecto: Proyecto Integrador - Programación Orientada a Objetos
+ * Autor: Monserrat Hernández Lomas
+ * Fecha: Junio 2025
+ */
 #include <iostream>
 #include <fstream>
 #include <sstream>
