@@ -15,10 +15,8 @@ TEST(SerieTest, CreaSerieCorrectamente) {
 TEST(SerieTest, HeredaCalificacionDeVideo) {
     Serie serie("011", "Stranger Things", 50, "Ciencia Ficción", 2, "Chapter One");
 
-    // Al inicio no tiene calificaciones, debe devolver 0
     EXPECT_DOUBLE_EQ(serie.getCalificacion(), 0.0);
 
-    // Agregar calificaciones (método heredado de Video)
     serie.agregarCalificacion(3);
     serie.agregarCalificacion(4);
 
