@@ -1,11 +1,9 @@
 #include "Video.h"
-#include <stdexcept>
-#include <numeric>
 
 Video::Video(const std::string& id, const std::string& nombre, int duracion, const std::string& genero)
     : id(id), nombre(nombre), duracion(duracion), genero(genero) {
     if (duracion < 0) {
-        throw std::invalid_argument("La duración no puede ser negativa");
+        throw std::invalid_argument("Duración no puede ser negativa");
     }
 }
 
@@ -16,7 +14,7 @@ std::string Video::getGenero() const { return genero; }
 
 void Video::agregarCalificacion(int cal) {
     if (cal < 1 || cal > 5) {
-        throw std::out_of_range("Calificación fuera de rango (debe estar entre 1 y 5)");
+        throw std::out_of_range("Calificación debe estar entre 1 y 5");
     }
     calificaciones.push_back(cal);
 }
