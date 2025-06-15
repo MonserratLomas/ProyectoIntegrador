@@ -22,7 +22,7 @@ void Episodio::Calificar(int valor) {
     calificaciones.push_back(valor);
 }
 
-double Episodio::0btenerCalificacionPromedio() const {
+double Episodio::ObtenerCalificacionPromedio() const {
     if (calificaciones.empty()) return 0.0;
     return static_cast<double>(std::accumulate(calificaciones.begin(), calificaciones.end(), 0)) / calificaciones.size();
 }
