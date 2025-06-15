@@ -1,3 +1,12 @@
+/*
+ * Episodio.h
+ * 
+ * Declaración de la clase Episodio utilizada en una Serie.
+ * 
+ * Proyecto: Proyecto Integrador - Programación Orientada a Objetos
+ * Autor: Monserrat Hernández Lomas
+ * Fecha: Junio 2025
+ */
 #ifndef EPISODIO_H
 #define EPISODIO_H
 
