@@ -46,37 +46,37 @@ public:
      * @brief Obtiene el identificador del video.
      * @return Cadena con el id del video.
      */
-    std::string getId() const;
+    std::string GetId() const;
 
     /**
      * @brief Obtiene el nombre del video.
      * @return Cadena con el nombre del video.
      */
-    std::string getNombre() const;
+    std::string GetNombre() const;
 
     /**
      * @brief Obtiene la duración del video.
      * @return Duración en minutos.
      */
-    int getDuracion() const;
+    int GetDuracion() const;
 
     /**
      * @brief Obtiene el género del video.
      * @return Cadena con el género del video.
      */
-    std::string getGenero() const;
+    std::string GetGenero() const;
 
     /**
      * @brief Agrega una calificación al video.
      * @param cal Valor de la calificación (usualmente en un rango definido, por ejemplo 1 a 10).
      */
-    virtual void agregarCalificacion(int cal);
+    virtual void AgregarCalificacion(int cal);
 
     /**
      * @brief Calcula y obtiene la calificación promedio del video.
      * @return Promedio de las calificaciones. Retorna 0 si no hay calificaciones.
      */
-    virtual double getCalificacion() const;
+    virtual double GetCalificacion() const;
 };
 
 #endif
