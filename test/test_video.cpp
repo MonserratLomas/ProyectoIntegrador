@@ -1,3 +1,12 @@
+/*
+ * test_video.cpp
+ * 
+ * Pruebas unitarias para la clase Video.
+ * 
+ * Proyecto: Proyecto Integrador - Programación Orientada a Objetos
+ * Autor: Monserrat Hernández Lomas
+ * Fecha: Junio 2025
+ */
 #include <gtest/gtest.h>
 #include "../Video.h"
 
