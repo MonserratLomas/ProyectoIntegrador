@@ -1,3 +1,12 @@
+/*
+ * Video.cpp
+ * 
+ * Implementación de la clase Video, que representa un video genérico.
+ * 
+ * Proyecto: Proyecto Integrador - Programación Orientada a Objetos
+ * Autor: Monserrat Hernández Lomas
+ * Fecha: Junio 2025
+ */
 #include "Video.h"
 
 Video::Video(const std::string& id, const std::string& nombre, int duracion, const std::string& genero)
