@@ -1,0 +1,3 @@
+/Users/monselomas/ProyectoIntegrador/build/CMakeFiles/ProyectoIntegrador.dir
+/Users/monselomas/ProyectoIntegrador/build/CMakeFiles/edit_cache.dir
+/Users/monselomas/ProyectoIntegrador/build/CMakeFiles/rebuild_cache.dir
