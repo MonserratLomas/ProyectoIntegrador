@@ -1,3 +1,12 @@
+/*
+ * Episodio.cpp
+ * 
+ * Implementación de la clase Episodio, parte de una Serie.
+ * 
+ * Proyecto: Proyecto Integrador - Programación Orientada a Objetos
+ * Autor: Monserrat Hernández Lomas
+ * Fecha: Junio 2025
+ */
 #include "Episodio.h"
 
 Episodio::Episodio(const std::string& titulo, int temporada)
