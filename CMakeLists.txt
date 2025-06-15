@@ -37,8 +37,9 @@ enable_testing()
 
 # Tests: todos los archivos test_*.cpp dentro de test/
 file(GLOB TEST_FILES "test/test_*.cpp")
+set(TEST_MAIN "test/test_main.cpp") 
 
-add_executable(runTests ${TEST_FILES})
+add_executable(runTests ${SOURCE_FILES} ${TEST_FILES} ${TEST_MAIN})
 
 
 # Linkea GoogleTest y pthread
