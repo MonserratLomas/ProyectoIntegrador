@@ -48,7 +48,7 @@ endforeach()
 set(TEST_MAIN "${CMAKE_SOURCE_DIR}/test/test_main.cpp")
 
 # Junta todos los archivos test y el main
-set(ALL_TEST_FILES ${TEST_MAIN} ${TEST_FILES})${SOURCE_FILES})
+set(ALL_TEST_FILES ${TEST_MAIN} ${TEST_FILES})
 
 # Define ejecutable para tests
 add_executable(runTests ${ALL_TEST_FILES})
