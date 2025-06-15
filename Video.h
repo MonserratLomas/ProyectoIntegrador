@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <numeric>
+#include <stdexcept>
 
 class Video {
 protected:
@@ -15,14 +16,14 @@ protected:
 
 public:
     Video(const std::string& id, const std::string& nombre, int duracion, const std::string& genero);
-    virtual ~Video() {}
 
     std::string getId() const;
     std::string getNombre() const;
     int getDuracion() const;
     std::string getGenero() const;
-    void agregarCalificacion(int cal);
-    double getCalificacion() const;
+
+    virtual void agregarCalificacion(int cal);
+    virtual double getCalificacion() const;
 };
 
 #endif
