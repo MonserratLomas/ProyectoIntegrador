@@ -39,9 +39,12 @@ enable_testing()
 file(GLOB TEST_FILES "test/test_*.cpp")
 set(TEST_MAIN "test/test_main.cpp") 
 
-add_executable(runTests ${SOURCE_FILES} ${TEST_FILES} ${TEST_MAIN})
+set(ALL_TEST_FILES ${TEST_MAIN} ${TEST_FILES})
 
-target_include_directories(runTests PRIVATE ${PROJECT_SOURCE_DIR})
+# Ejecutable de tests con todos los archivos
+add_executable(runTests ${ALL_TEST_FILES})
+
+
 # Linkea GoogleTest y pthread
 target_link_libraries(runTests gtest_main pthread)
 
