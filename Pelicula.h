@@ -6,7 +6,6 @@
 class Pelicula : public Video {
 public:
     Pelicula(const std::string& id, const std::string& nombre, int duracion, const std::string& genero);
-    // otros métodos y atributos
 };
 
-#endif // PELICULA_H
+#endif
