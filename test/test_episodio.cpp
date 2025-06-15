@@ -23,11 +23,9 @@ TEST(EpisodioTest, AgregaCalificacionesValidas) {
     EXPECT_DOUBLE_EQ(episodio.obtenerCalificacionPromedio(), 4.0);
 }
 
-TEST(EpisodioTest, NoAgregaCalificacionesInvalidas) {
+TEST(EpisodioTest, RechazaCalificacionesInvalidas) {
     Episodio episodio("Capítulo 4", 2);
 
-    episodio.calificar(0);  // inválida, no debe agregarse
-    episodio.calificar(6);  // inválida, no debe agregarse
-
-    EXPECT_DOUBLE_EQ(episodio.obtenerCalificacionPromedio(), 0.0);
+    EXPECT_THROW(episodio.calificar(0), std::out_of_range);
+    EXPECT_THROW(episodio.calificar(6), std::out_of_range);
 }
