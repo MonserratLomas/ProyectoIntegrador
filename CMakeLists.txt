@@ -1,14 +1,22 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.10)
+project(ProyectoIntegrador VERSION 1.0 LANGUAGES CXX)
 
-project(ProyectoIntegrador VERSION 1.0.0 LANGUAGES CXX)
-
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
 
-# --------------------------
-# Archivos fuente del proyecto principal
-# --------------------------
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
+
+if(ENABLE_COVERAGE)
+    message(STATUS "Coverage enabled")
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        add_compile_options(--coverage -O0 -g)
+        add_link_options(--coverage)
+    endif()
+endif()
+
+# Archivos fuente del proyecto
 set(SOURCES
     main.cpp
     Video.cpp
@@ -18,24 +26,28 @@ set(SOURCES
 )
 
 add_executable(ProyectoIntegrador ${SOURCES})
-target_include_directories(ProyectoIntegrador PRIVATE ${CMAKE_SOURCE_DIR})
 
+# Incluir la carpeta raíz para los includes
+target_include_directories(ProyectoIntegrador PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-# --------------------------
-# GoogleTest
-# --------------------------
-# Cambia 1.17.0 si ves otra versión en /opt/homebrew/Cellar/googletest/
-set(GTEST_ROOT /opt/homebrew/Cellar/googletest/1.17.0)
-find_package(GTest REQUIRED PATHS ${GTEST_ROOT}/lib/cmake/GTest)
-
+# Configuración para GoogleTest
 enable_testing()
+find_package(GTest REQUIRED)
 
-# Buscar todos los archivos test/test_*.cpp
-file(GLOB TEST_SOURCES "test/test_*.cpp")
+# Archivos fuente de tests
+set(TEST_SOURCES
+    test/test_video.cpp
+    test/test_pelicula.cpp
+    test/test_serie.cpp
+    test/test_episodio.cpp
+)
 
 add_executable(runTests ${TEST_SOURCES})
-target_include_directories(runTests PRIVATE ${CMAKE_SOURCE_DIR})
+
 target_link_libraries(runTests PRIVATE GTest::gtest_main)
+
+# Para que los tests puedan incluir los headers y fuentes del proyecto
+target_include_directories(runTests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 include(GoogleTest)
 gtest_discover_tests(runTests)
