@@ -1,15 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
-project(VideoApp)
+project(ProyectoIntegrador)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Incluir carpeta con headers
-include_directories(${PROJECT_SOURCE_DIR})
-
-# Archivos fuente
+# Agrega tus fuentes
 set(SOURCES
-    main.cpp
+    main.cpp         
     Video.cpp
     Pelicula.cpp
     Serie.cpp
@@ -17,34 +13,27 @@ set(SOURCES
 )
 
 # Ejecutable principal
-add_executable(video_app ${SOURCES})
+add_executable(ProyectoIntegrador ${SOURCES})
 
-# GoogleTest
-# Descargar e incluir automáticamente si no está instalado
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/refs/tags/release-1.13.0.zip
-)
-# Evitar usar install() en GTest
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
-
+# Google Test
 enable_testing()
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
 
-# Ejecutable tests
-add_executable(runTests
-    test_episodio.cpp
-    test_pelicula.cpp
-    test_serie.cpp
-    test_video.cpp
+# Fuentes para tests (excluyendo main.cpp)
+set(TEST_SOURCES
+    test/test_main.cpp       
+    test/test_episodio.cpp
+    test/test_pelicula.cpp
+    test/test_serie.cpp
+    test/test_video.cpp
     Video.cpp
     Pelicula.cpp
     Serie.cpp
     Episodio.cpp
 )
 
-target_link_libraries(runTests gtest_main)
+add_executable(runTests ${TEST_SOURCES})
+target_link_libraries(runTests ${GTEST_LIBRARIES} pthread)
 
-include(GoogleTest)
-gtest_discover_tests(runTests)
+add_test(NAME runTests COMMAND runTests)
