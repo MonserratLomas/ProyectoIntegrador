@@ -2,6 +2,7 @@
 #define SERIE_H
 
 #include "Video.h"
+#include <string>
 
 class Serie : public Video {
 private:
@@ -14,4 +15,5 @@ public:
     int getTemporada() const;
     std::string getTituloEpisodio() const;
 };
+
 #endif
