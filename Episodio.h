@@ -38,19 +38,19 @@ public:
      * @brief Obtiene el título del episodio.
      * @return Título.
      */
-    std::string getTitulo() const;
+    std::string GetTitulo() const;
 
     /**
      * @brief Obtiene el número de temporada del episodio.
      * @return Número de temporada.
      */
-    int getTemporada() const;
+    int GetTemporada() const;
 
     /**
      * @brief Agrega una calificación al episodio.
      * @param valor Calificación a agregar (por ejemplo, de 1 a 10).
      */
-    void calificar(int valor);
+    void Calificar(int valor);
 
     /**
      * @brief Calcula el promedio de calificaciones.
