@@ -30,14 +30,10 @@ set(SOURCES
 add_executable(ProyectoIntegrador ${SOURCES})
 target_include_directories(ProyectoIntegrador PRIVATE ${CMAKE_SOURCE_DIR})
 
-# ----------------------------------------------------------
-# CONFIGURACIÓN DE GOOGLE TEST
-# ----------------------------------------------------------
+# -------- Tests ---------
 
-# Buscar GoogleTest instalado en el sistema
 find_package(GTest REQUIRED)
 
-# Añadir los archivos de test (ajusta las rutas si están en carpeta 'test')
 set(TEST_SOURCES
     test/test_episodio.cpp
     test/test_pelicula.cpp
@@ -46,13 +42,8 @@ set(TEST_SOURCES
 )
 
 add_executable(runTests ${TEST_SOURCES})
-
-# Incluye directorios de headers
 target_include_directories(runTests PRIVATE ${CMAKE_SOURCE_DIR})
-
-# Enlaza con GoogleTest y pthread (en Linux/macOS)
 target_link_libraries(runTests PRIVATE GTest::gtest_main pthread)
 
-# Habilita tests para CTest
 include(GoogleTest)
 gtest_discover_tests(runTests)
