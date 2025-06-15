@@ -13,28 +13,28 @@
 TEST(EpisodioTest, CreaEpisodioCorrectamente) {
     Episodio episodio("El comienzo", 1);
 
-    EXPECT_EQ(episodio.getTitulo(), "El comienzo");
-    EXPECT_EQ(episodio.getTemporada(), 1);
+    EXPECT_EQ(episodio.GetTitulo(), "El comienzo");
+    EXPECT_EQ(episodio.GetTemporada(), 1);
 }
 
 TEST(EpisodioTest, CalificacionPromedioInicialEsCero) {
     Episodio episodio("Capítulo 2", 1);
 
-    EXPECT_DOUBLE_EQ(episodio.obtenerCalificacionPromedio(), 0.0);
+    EXPECT_DOUBLE_EQ(episodio.ObtenerCalificacionPromedio(), 0.0);
 }
 
 TEST(EpisodioTest, AgregaCalificacionesValidas) {
     Episodio episodio("Capítulo 3", 1);
 
-    episodio.calificar(3);
-    episodio.calificar(5);
+    episodio.Calificar(3);
+    episodio.Calificar(5);
 
-    EXPECT_DOUBLE_EQ(episodio.obtenerCalificacionPromedio(), 4.0);
+    EXPECT_DOUBLE_EQ(episodio.ObtenerCalificacionPromedio(), 4.0);
 }
 
 TEST(EpisodioTest, RechazaCalificacionesInvalidas) {
     Episodio episodio("Capítulo 4", 2);
 
-    EXPECT_THROW(episodio.calificar(0), std::out_of_range);
-    EXPECT_THROW(episodio.calificar(6), std::out_of_range);
+    EXPECT_THROW(episodio.Calificar(0), std::out_of_range);
+    EXPECT_THROW(episodio.Calificar(6), std::out_of_range);
 }
