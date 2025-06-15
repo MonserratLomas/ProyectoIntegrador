@@ -13,7 +13,7 @@ Episodio::Episodio(const std::string& titulo, int temporada)
     : titulo(titulo), temporada(temporada) {}
 
 std::string Episodio::GetTitulo() const { return titulo; }
-int Episodio::getTemporada() const { return temporada; }
+int Episodio::GetTemporada() const { return temporada; }
 
 void Episodio::Calificar(int valor) {
     if (valor < 1 || valor > 5) {
