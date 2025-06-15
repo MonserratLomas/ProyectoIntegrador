@@ -25,9 +25,6 @@ add_executable(ProyectoIntegrador ${SOURCE_FILES})
 # GoogleTest con FetchContent
 include(FetchContent)
 
-# GoogleTest con FetchContent
-include(FetchContent)
-
 FetchContent_Declare(
   googletest
   URL https://github.com/google/googletest/archive/refs/tags/release-1.13.0.zip
@@ -45,9 +42,8 @@ foreach(f IN LISTS TEST_FILES)
     message(STATUS "  > ${f}")
 endforeach()
 
-
-# Archivo con el main de GoogleTest
-set(TEST_MAIN "test/test_main.cpp")
+# Archivo con el main de GoogleTest (usa ruta absoluta para evitar problemas)
+set(TEST_MAIN "${CMAKE_SOURCE_DIR}/test/test_main.cpp")
 
 # Junta todos los archivos test y el main
 set(ALL_TEST_FILES ${TEST_MAIN} ${TEST_FILES})
@@ -60,7 +56,3 @@ target_link_libraries(runTests gtest_main pthread)
 
 # Registra el test para ctest
 add_test(NAME runTests COMMAND runTests)
-
-
-add_executable(testOnly test/test_main.cpp)
-target_link_libraries(testOnly gtest_main pthread)
