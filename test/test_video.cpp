@@ -13,32 +13,32 @@
 TEST(VideoTest, CreaVideoCorrectamente) {
     Video video("001", "Matrix", 120, "Acción");
 
-    EXPECT_EQ(video.getId(), "001");
-    EXPECT_EQ(video.getNombre(), "Matrix");
-    EXPECT_EQ(video.getDuracion(), 120);
-    EXPECT_EQ(video.getGenero(), "Acción");
+    EXPECT_EQ(video.GetId(), "001");
+    EXPECT_EQ(video.GetNombre(), "Matrix");
+    EXPECT_EQ(video.GetDuracion(), 120);
+    EXPECT_EQ(video.GetGenero(), "Acción");
 }
 
 TEST(VideoTest, CalificacionVaciaDevuelveCero) {
     Video video("002", "Vacío", 90, "Drama");
 
-    EXPECT_DOUBLE_EQ(video.getCalificacion(), 0.0);
+    EXPECT_DOUBLE_EQ(video.GetCalificacion(), 0.0);
 }
 
 TEST(VideoTest, AgregaCalificacionesValidas) {
     Video video("003", "Test", 100, "Comedia");
 
-    video.agregarCalificacion(4);
-    video.agregarCalificacion(5);
+    video.AgregarCalificacion(4);
+    video.AgregarCalificacion(5);
 
-    EXPECT_DOUBLE_EQ(video.getCalificacion(), 4.5);
+    EXPECT_DOUBLE_EQ(video.GetCalificacion(), 4.5);
 }
 
 TEST(VideoTest, RechazaCalificacionesInvalidas) {
     Video video("004", "Test", 100, "Comedia");
 
-    EXPECT_THROW(video.agregarCalificacion(0), std::out_of_range);
-    EXPECT_THROW(video.agregarCalificacion(6), std::out_of_range);
+    EXPECT_THROW(video.AgregarCalificacion(0), std::out_of_range);
+    EXPECT_THROW(video.AgregarCalificacion(6), std::out_of_range);
 }
 
 TEST(VideoTest, LanzaExcepcionDuracionNegativa) {
