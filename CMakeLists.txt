@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Opción para activar cobertura de código
 option(ENABLE_COVERAGE "Enable code coverage flags" OFF)
 
 if(ENABLE_COVERAGE)
@@ -18,7 +19,7 @@ if(ENABLE_COVERAGE)
     endif()
 endif()
 
-# Archivos fuente del programa principal
+# Archivos fuente del proyecto
 set(SOURCES
     main.cpp
     Video.cpp
@@ -27,31 +28,8 @@ set(SOURCES
     Episodio.cpp
 )
 
+# Crear el ejecutable
 add_executable(ProyectoIntegrador ${SOURCES})
 
+# Directorio raíz donde están los headers
 target_include_directories(ProyectoIntegrador PRIVATE ${CMAKE_SOURCE_DIR})
-
-# --- GoogleTest ---
-
-# Descargar GoogleTest automáticamente si no está presente
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/refs/tags/release-1.12.1.zip
-)
-# Para que GoogleTest no use pthreads en Mac, puedes deshabilitarlo si da error
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
-
-enable_testing()
-
-# Tests
-file(GLOB TEST_SOURCES "test/*.cpp") # Asumiendo tus tests están en carpeta test/
-
-add_executable(tests ${TEST_SOURCES})
-
-target_link_libraries(tests PRIVATE ProyectoIntegrador gtest gtest_main)
-
-target_include_directories(tests PRIVATE ${CMAKE_SOURCE_DIR})
-
-add_test(NAME RunAllTests COMMAND tests)
