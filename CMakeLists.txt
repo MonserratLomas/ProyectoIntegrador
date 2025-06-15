@@ -1,24 +1,12 @@
-cmake_minimum_required(VERSION 3.30)
+cmake_minimum_required(VERSION 3.10)
 
-project(ProyectoIntegrador VERSION 1.0.0 LANGUAGES CXX)
+project(ProyectoIntegrador VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-option(ENABLE_COVERAGE "Enable code coverage flags" OFF)
-
-if(ENABLE_COVERAGE)
-    message(STATUS "Code coverage enabled")
-    if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-        add_compile_options(-fprofile-arcs -ftest-coverage -O0)
-        add_link_options(-fprofile-arcs -ftest-coverage)
-    else()
-        message(WARNING "Coverage enabled but compiler not supported for coverage flags")
-    endif()
-endif()
-
-# Archivos fuente del proyecto
+# Archivos fuente del proyecto principal
 set(SOURCES
     main.cpp
     Video.cpp
@@ -27,23 +15,41 @@ set(SOURCES
     Episodio.cpp
 )
 
+# Crear el ejecutable principal
 add_executable(ProyectoIntegrador ${SOURCES})
 target_include_directories(ProyectoIntegrador PRIVATE ${CMAKE_SOURCE_DIR})
 
-# -------- Tests ---------
+# --- Setup GoogleTest --- #
 
-find_package(GTest REQUIRED)
+# Descargar GoogleTest si no está (requiere CMake >= 3.11)
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/refs/heads/main.zip
+)
+# Evitar instalación propia de gtest
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
 
+enable_testing()
+
+# Archivos fuente de tests
 set(TEST_SOURCES
-    test/test_episodio.cpp
+    test/test_video.cpp
     test/test_pelicula.cpp
     test/test_serie.cpp
-    test/test_video.cpp
+    test/test_episodio.cpp
 )
 
+# Crear ejecutable de tests
 add_executable(runTests ${TEST_SOURCES})
-target_include_directories(runTests PRIVATE ${CMAKE_SOURCE_DIR})
-target_link_libraries(runTests PRIVATE GTest::gtest_main pthread)
 
+# Incluir headers
+target_include_directories(runTests PRIVATE ${CMAKE_SOURCE_DIR})
+
+# Linkear con GoogleTest y pthread
+target_link_libraries(runTests gtest_main)
+
+# Registrar tests automáticamente para ctest
 include(GoogleTest)
 gtest_discover_tests(runTests)
