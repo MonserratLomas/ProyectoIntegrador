@@ -25,6 +25,9 @@ jobs:
           sudo cp lib/*.a /usr/lib
 
       # 3. Crear directorio de compilación y configurar el proyecto
+      - name: Clean build folder
+        run: rm -rf build
+
       - name: Configure Build System
         run: |
           mkdir -p build
