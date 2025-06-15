@@ -1,50 +1,50 @@
-cmake_minimum_required(VERSION 3.14)
-project(ProyectoIntegrador VERSION 1.0 LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.10)
+project(VideoApp)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-option(ENABLE_COVERAGE "Enable code coverage" OFF)
-if(ENABLE_COVERAGE)
-  message(STATUS "Building with coverage enabled")
-  add_compile_options(--coverage -O0)
-  add_link_options(--coverage)
-endif()
+# Incluir carpeta con headers
+include_directories(${PROJECT_SOURCE_DIR})
 
-# Archivos fuente principales (NO incluir main.cpp en tests)
-set(SOURCE_FILES
-  Video.cpp
-  Pelicula.cpp
-  Serie.cpp
-  Episodio.cpp
+# Archivos fuente
+set(SOURCES
+    main.cpp
+    Video.cpp
+    Pelicula.cpp
+    Serie.cpp
+    Episodio.cpp
 )
 
-# Ejecutable principal, con main.cpp
-add_executable(ProyectoIntegrador main.cpp ${SOURCE_FILES})
+# Ejecutable principal
+add_executable(video_app ${SOURCES})
 
-# --- GoogleTest setup ---
+# GoogleTest
+# Descargar e incluir automáticamente si no está instalado
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/refs/tags/release-1.13.0.zip
+)
+# Evitar usar install() en GTest
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
 enable_testing()
 
-# Buscar todos los archivos de test test_*.cpp en la carpeta test/
-file(GLOB TEST_FILES "${CMAKE_SOURCE_DIR}/test/test_*.cpp")
+# Ejecutable tests
+add_executable(runTests
+    test_episodio.cpp
+    test_pelicula.cpp
+    test_serie.cpp
+    test_video.cpp
+    Video.cpp
+    Pelicula.cpp
+    Serie.cpp
+    Episodio.cpp
+)
 
-message(STATUS "Archivos de test encontrados:")
-foreach(f IN LISTS TEST_FILES)
-  message(STATUS "  > ${f}")
-endforeach()
+target_link_libraries(runTests gtest_main)
 
-# Archivo con el main de GoogleTest (test_main.cpp)
-set(TEST_MAIN "${CMAKE_SOURCE_DIR}/test/test_main.cpp")
-
-# Para tests NO incluir main.cpp ni otros archivos fuente del proyecto
-# Solo los tests y las clases que usan, por eso incluimos ${SOURCE_FILES} sin main.cpp
-add_executable(runTests ${TEST_MAIN} ${TEST_FILES} ${SOURCE_FILES})
-
-# Busca GoogleTest en el sistema (requiere que esté instalado)
-find_package(GTest REQUIRED)
-
-# Link con GoogleTest y pthread (Linux/macOS)
-target_link_libraries(runTests GTest::gtest_main pthread)
-
-# Registra el test para ctest
-add_test(NAME runTests COMMAND runTests)
+include(GoogleTest)
+gtest_discover_tests(runTests)
