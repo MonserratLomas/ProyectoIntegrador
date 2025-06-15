@@ -36,7 +36,8 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 # Busca todos los archivos test_*.cpp dentro de test/
-file(GLOB TEST_FILES "${CMAKE_SOURCE_DIR}/test/test_*.cpp")
+file(GLOB TEST_FILES "test/test_*.cpp")
+
 message(STATUS "Archivos de test encontrados:")
 foreach(f IN LISTS TEST_FILES)
     message(STATUS "  > ${f}")
