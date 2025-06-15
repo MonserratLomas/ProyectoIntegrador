@@ -56,7 +56,7 @@ public:
      * @brief Calcula el promedio de calificaciones.
      * @return Promedio de las calificaciones, o 0 si no hay ninguna.
      */
-    double obtenerCalificacionPromedio() const;
+    double ObtenerCalificacionPromedio() const;
 };
 
 #endif
