@@ -40,10 +40,8 @@ file(GLOB TEST_FILES "test/test_*.cpp")
 
 add_executable(runTests ${TEST_FILES})
 
-target_link_libraries(runTests
-  gtest_main
-  gtest
-  pthread
-)
+
+# Linkea GoogleTest y pthread
+target_link_libraries(runTests gtest_main pthread)
 
 add_test(NAME runTests COMMAND runTests)
