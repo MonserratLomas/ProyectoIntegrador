@@ -1,3 +1,12 @@
+/*
+ * Serie.h
+ * 
+ * Declaración de la clase Serie que hereda de Video.
+ * 
+ * Proyecto: Proyecto Integrador - Programación Orientada a Objetos
+ * Autor: Monserrat Hernández Lomas
+ * Fecha: Junio 2025
+ */
 #ifndef SERIE_H
 #define SERIE_H
 
