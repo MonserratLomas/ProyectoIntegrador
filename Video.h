@@ -1,3 +1,12 @@
+/*
+ * Video.h
+ * 
+ * Declaración de la clase base Video.
+ * 
+ * Proyecto: Proyecto Integrador - Programación Orientada a Objetos
+ * Autor: Monserrat Hernández Lomas
+ * Fecha: Junio 2025
+ */
 #ifndef VIDEO_H
 #define VIDEO_H
 
