@@ -23,17 +23,6 @@ set(SOURCE_FILES
 add_executable(ProyectoIntegrador ${SOURCE_FILES})
 
 # --- GoogleTest setup ---
-include(FetchContent)
-
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/refs/tags/release-1.13.0.zip
-)
-
-# For Windows: Force shared CRT
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
-
 enable_testing()
 
 # Buscar todos los archivos de test test_*.cpp en la carpeta test/
@@ -50,11 +39,14 @@ set(TEST_MAIN "${CMAKE_SOURCE_DIR}/test/test_main.cpp")
 # Junta todos los archivos test y el main
 set(ALL_TEST_FILES ${TEST_MAIN} ${TEST_FILES})
 
+# Busca GoogleTest en el sistema (requiere que esté instalado)
+find_package(GTest REQUIRED)
+
 # Define ejecutable para tests
 add_executable(runTests ${ALL_TEST_FILES})
 
 # Link con GoogleTest y pthread (Linux/macOS)
-target_link_libraries(runTests gtest_main pthread)
+target_link_libraries(runTests GTest::gtest_main pthread)
 
 # Registra el test para ctest
 add_test(NAME runTests COMMAND runTests)
