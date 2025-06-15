@@ -11,17 +11,16 @@ if(ENABLE_COVERAGE)
   add_link_options(--coverage)
 endif()
 
-# Archivos fuente principales
+# Archivos fuente principales (NO incluir main.cpp en tests)
 set(SOURCE_FILES
-  main.cpp
   Video.cpp
   Pelicula.cpp
   Serie.cpp
   Episodio.cpp
 )
 
-# Ejecutable principal
-add_executable(ProyectoIntegrador ${SOURCE_FILES})
+# Ejecutable principal, con main.cpp
+add_executable(ProyectoIntegrador main.cpp ${SOURCE_FILES})
 
 # --- GoogleTest setup ---
 enable_testing()
@@ -37,14 +36,12 @@ endforeach()
 # Archivo con el main de GoogleTest (test_main.cpp)
 set(TEST_MAIN "${CMAKE_SOURCE_DIR}/test/test_main.cpp")
 
-# Junta todos los archivos test, el main y los archivos fuente del proyecto
-set(ALL_TEST_FILES ${TEST_MAIN} ${TEST_FILES} ${SOURCE_FILES})
+# Para tests NO incluir main.cpp ni otros archivos fuente del proyecto
+# Solo los tests y las clases que usan, por eso incluimos ${SOURCE_FILES} sin main.cpp
+add_executable(runTests ${TEST_MAIN} ${TEST_FILES} ${SOURCE_FILES})
 
 # Busca GoogleTest en el sistema (requiere que esté instalado)
 find_package(GTest REQUIRED)
-
-# Define ejecutable para tests (ahora también compila las clases)
-add_executable(runTests ${ALL_TEST_FILES})
 
 # Link con GoogleTest y pthread (Linux/macOS)
 target_link_libraries(runTests GTest::gtest_main pthread)
