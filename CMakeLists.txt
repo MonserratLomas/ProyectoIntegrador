@@ -1,53 +1,57 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.14)
 project(ProyectoIntegrador VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
-option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
-
+# Opcional: activar opciones de cobertura si usas -DENABLE_COVERAGE=ON
+option(ENABLE_COVERAGE "Enable code coverage" OFF)
 if(ENABLE_COVERAGE)
-    message(STATUS "Coverage enabled")
-    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-        add_compile_options(--coverage -O0 -g)
-        add_link_options(--coverage)
-    endif()
+  message(STATUS "Building with coverage enabled")
+  add_compile_options(--coverage -O0)
+  add_link_options(--coverage)
 endif()
 
-# Archivos fuente del proyecto
-set(SOURCES
-    main.cpp
-    Video.cpp
-    Pelicula.cpp
-    Serie.cpp
-    Episodio.cpp
+# --- Archivos fuente de la app principal ---
+set(SOURCE_FILES
+  main.cpp
+  Video.cpp
+  Pelicula.cpp
+  Serie.cpp
+  Episodio.cpp
 )
 
-add_executable(ProyectoIntegrador ${SOURCES})
+add_executable(ProyectoIntegrador ${SOURCE_FILES})
 
-# Incluir la carpeta raíz para los includes
-target_include_directories(ProyectoIntegrador PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+# --- GoogleTest (FetchContent) ---
+include(FetchContent)
 
-# Configuración para GoogleTest
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/refs/tags/release-1.13.0.zip
+)
+
+# Evitar instalar GoogleTest durante build
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
 enable_testing()
-find_package(GTest REQUIRED)
 
-# Archivos fuente de tests
-set(TEST_SOURCES
-    test/test_video.cpp
-    test/test_pelicula.cpp
-    test/test_serie.cpp
-    test/test_episodio.cpp
+# --- Archivos tests ---
+set(TEST_FILES
+  test/EpisodioTest.cpp
+  test/PeliculaTest.cpp
+  test/SerieTest.cpp
+  test/VideoTest.cpp
 )
 
-add_executable(runTests ${TEST_SOURCES})
+add_executable(runTests ${TEST_FILES})
 
-target_link_libraries(runTests PRIVATE GTest::gtest_main)
+target_link_libraries(runTests
+  gtest_main
+  gtest
+  pthread
+)
 
-# Para que los tests puedan incluir los headers y fuentes del proyecto
-target_include_directories(runTests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-
-include(GoogleTest)
-gtest_discover_tests(runTests)
+# Registrar tests para ctest
+add_test(NAME runTests COMMAND runTests)
