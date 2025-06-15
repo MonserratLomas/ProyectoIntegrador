@@ -4,7 +4,6 @@ project(ProyectoIntegrador VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Opcional: activar opciones de cobertura si usas -DENABLE_COVERAGE=ON
 option(ENABLE_COVERAGE "Enable code coverage" OFF)
 if(ENABLE_COVERAGE)
   message(STATUS "Building with coverage enabled")
@@ -12,7 +11,7 @@ if(ENABLE_COVERAGE)
   add_link_options(--coverage)
 endif()
 
-# --- Archivos fuente de la app principal ---
+# Archivos fuente principales
 set(SOURCE_FILES
   main.cpp
   Video.cpp
@@ -23,7 +22,7 @@ set(SOURCE_FILES
 
 add_executable(ProyectoIntegrador ${SOURCE_FILES})
 
-# --- GoogleTest (FetchContent) ---
+# GoogleTest con FetchContent
 include(FetchContent)
 
 FetchContent_Declare(
@@ -31,19 +30,13 @@ FetchContent_Declare(
   URL https://github.com/google/googletest/archive/refs/tags/release-1.13.0.zip
 )
 
-# Evitar instalar GoogleTest durante build
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-# --- Archivos tests ---
-set(TEST_FILES
-  test/EpisodioTest.cpp
-  test/PeliculaTest.cpp
-  test/SerieTest.cpp
-  test/VideoTest.cpp
-)
+# Tests: todos los archivos test_*.cpp dentro de test/
+file(GLOB TEST_FILES "test/test_*.cpp")
 
 add_executable(runTests ${TEST_FILES})
 
@@ -53,5 +46,4 @@ target_link_libraries(runTests
   pthread
 )
 
-# Registrar tests para ctest
 add_test(NAME runTests COMMAND runTests)
