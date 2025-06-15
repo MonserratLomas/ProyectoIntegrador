@@ -16,19 +16,19 @@ Video::Video(const std::string& id, const std::string& nombre, int duracion, con
     }
 }
 
-std::string Video::getId() const { return id; }
-std::string Video::getNombre() const { return nombre; }
-int Video::getDuracion() const { return duracion; }
-std::string Video::getGenero() const { return genero; }
+std::string Video::GetId() const { return id; }
+std::string Video::GetNombre() const { return nombre; }
+int Video::GetDuracion() const { return duracion; }
+std::string Video::GetGenero() const { return genero; }
 
-void Video::agregarCalificacion(int cal) {
+void Video::AgregarCalificacion(int cal) {
     if (cal < 1 || cal > 5) {
         throw std::out_of_range("Calificación debe estar entre 1 y 5");
     }
     calificaciones.push_back(cal);
 }
 
-double Video::getCalificacion() const {
+double Video::GetCalificacion() const {
     if (calificaciones.empty()) return 0.0;
     return static_cast<double>(std::accumulate(calificaciones.begin(), calificaciones.end(), 0)) / calificaciones.size();
 }
