@@ -25,6 +25,9 @@ add_executable(ProyectoIntegrador ${SOURCE_FILES})
 # GoogleTest con FetchContent
 include(FetchContent)
 
+# GoogleTest con FetchContent
+include(FetchContent)
+
 FetchContent_Declare(
   googletest
   URL https://github.com/google/googletest/archive/refs/tags/release-1.13.0.zip
@@ -35,17 +38,20 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-# Tests: todos los archivos test_*.cpp dentro de test/
+# Busca todos los archivos test_*.cpp dentro de test/
 file(GLOB TEST_FILES "test/test_*.cpp")
-set(TEST_MAIN "test/test_main.cpp") 
 
+# Archivo con el main de GoogleTest
+set(TEST_MAIN "test/test_main.cpp")
+
+# Junta todos los archivos test y el main
 set(ALL_TEST_FILES ${TEST_MAIN} ${TEST_FILES})
 
-# Ejecutable de tests con todos los archivos
+# Define ejecutable de tests
 add_executable(runTests ${ALL_TEST_FILES})
 
-
-# Linkea GoogleTest y pthread
+# Link con GoogleTest y pthread
 target_link_libraries(runTests gtest_main pthread)
 
+# Registra el test para ctest
 add_test(NAME runTests COMMAND runTests)
