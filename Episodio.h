@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <numeric>
+#include <stdexcept>
 
 class Episodio {
 private:
@@ -16,6 +17,7 @@ public:
 
     std::string getTitulo() const;
     int getTemporada() const;
+
     void calificar(int valor);
     double obtenerCalificacionPromedio() const;
 };
