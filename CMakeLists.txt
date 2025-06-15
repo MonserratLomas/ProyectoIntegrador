@@ -60,3 +60,7 @@ target_link_libraries(runTests gtest_main pthread)
 
 # Registra el test para ctest
 add_test(NAME runTests COMMAND runTests)
+
+
+add_executable(testOnly test/test_main.cpp)
+target_link_libraries(testOnly gtest_main pthread)
